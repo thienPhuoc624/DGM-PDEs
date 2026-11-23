@@ -1,0 +1,11 @@
+# Downloaded historical raw price archives (recreated by the EDA script)
+data/cache/
+
+# Python / notebooks
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+
+# Editor files
+.DS_Store
