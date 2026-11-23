@@ -119,11 +119,7 @@ Run the other experiments in the same way using their linked filenames. **Import
 - **Trade-offs remain:** the option-training scripts explicitly compute mixed second derivatives, which can be costly as \(d\) grows; the Hutchinson estimator in `american_bound.py` is used for **bound evaluation**, not as a drop-in replacement for those training derivatives.
 - **Accuracy must be checked:** compare independent references or option-price bounds after adjusting batch size, training steps, model width, and hardware constraints. Results may differ from the original paper.
 
-## Reference
 
-> Sirignano, J., & Spiliopoulos, K. (2018). **DGM: A deep learning algorithm for solving partial differential equations.** *Journal of Computational Physics*. [Paper](https://arxiv.org/abs/1708.07469) · [DOI](https://doi.org/10.1016/j.jcp.2018.08.029)
-
-This repository is an independent implementation inspired by the research above.
 ## 4. Historical stock data, EDA, and volatility matrix (2000–2017)
 
 **Reproducible analysis:** [`stock_eda_2000_2017.py`](stock_eda_2000_2017.py) · [Automated generation workflow](.github/workflows/stock_eda.yml)
@@ -186,3 +182,9 @@ The script saves:
 - [`data/data_quality.csv`](data/data_quality.csv) and [`data/eda_summary.csv`](data/eda_summary.csv) — coverage and descriptive statistics.
 
 To use the new files with [`bs_no_analytic.py`](bs_no_analytic.py) or [`american_bound.py`](american_bound.py), replace their **Google Colab Drive paths** for the two input CSVs with `data/volatilities_2000_2017.csv` and `data/correlation_matrix_2000_2017.csv`. This is an independently reconstructed historical calibration, **not a claim of exact equality to the original paper's data preparation**.
+
+## Reference
+
+> Sirignano, J., & Spiliopoulos, K. (2018). **DGM: A deep learning algorithm for solving partial differential equations.** *Journal of Computational Physics*. [Paper](https://arxiv.org/abs/1708.07469) · [DOI](https://doi.org/10.1016/j.jcp.2018.08.029)
+
+This repository is an independent implementation inspired by the research above.
