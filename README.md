@@ -52,7 +52,7 @@ The links below point to the **actual scripts in this repository**. Each result 
 **Code:** [`black_scholes_semi_analytical_case.py`](black_scholes_semi_analytical_case.py)  
 A correlated, **20-dimensional geometric-basket American call** with a known lower-dimensional benchmark. The script currently evaluates \(K=1\), rather than running every dimension in the paper's Table 1.
 
-**Result image:** *Add `<img width="239" height="87" alt="image" src="https://github.com/user-attachments/assets/38f832a3-a2d0-4807-a9b9-55ed4ee82dae" />
+**Result image:** *Add `[<img width="239" height="87" alt="image" src="https://github.com/user-attachments/assets/38f832a3-a2d0-4807-a9b9-55ed4ee82dae" />](https://github.com/thienPhuoc624/DGM-PDEs/blob/main/Result/Screenshot%202026-11-23%20105313.png)
 ` here.*  
 <!-- ![Semi-analytic Black–Scholes experiment](results/american_semi_analytic.png) -->
 
