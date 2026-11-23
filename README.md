@@ -169,6 +169,8 @@ This additional analysis constructs the heterogeneous-stock inputs used by the A
 
 ![Daily log-return correlation matrix](results/correlation_matrix.svg)
 
+**Sample EDA findings.** Across **4,451 aligned daily returns**, Amazon (**AMZN**) has the highest annualized volatility (**52.97%**), followed by Morgan Stanley (**MS**, **50.18%**) and Bank of America (**BAC**, **47.31%**). General Mills (**GIS**, **18.21%**) and Johnson & Johnson (**JNJ**, **18.78%**) show lower volatility. The strongest pairwise sample correlation is **BAC–MS: 0.649**. These are **independent historical estimates**, not the original paper's quoted results.
+
 ### Reproduce and use the output
 
 ```bash
