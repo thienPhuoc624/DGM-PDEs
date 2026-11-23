@@ -22,11 +22,11 @@ with prescribed boundary data and initial or terminal data. DGM minimizes the me
 $$
 \mathcal{J}(\theta) =
 \lambda_{\mathrm{PDE}} \, \mathbb{E}_{(t,x)\sim\nu_\Omega}
-\big|\mathcal{R} f_\theta\big|^2
+\left|\mathcal{R} f_\theta\right|^2
 + \lambda_{\mathrm{BC}} \, \mathbb{E}_{(t,x)\sim\nu_{\partial\Omega}}
-\big|f_\theta - b\big|^2
-+ \lambda_{\mathrm{IC/TC}} \, \mathbb{E}_{x\sim\nu_0}
-\big|f_\theta(t_*,x) - g(x)\big|^2.
+\left|f_\theta - b\right|^2
++ \lambda_{\mathrm{ICTC}} \, \mathbb{E}_{x\sim\nu_0}
+\left|f_\theta(t_*,x) - g(x)\right|^2.
 $$
 
 Here \(t_*\) is the initial or terminal time, as appropriate. Derivatives are obtained by **automatic differentiation**; optimization uses **Adam** and independently sampled batches. Thus, training needs no full space-time mesh.
