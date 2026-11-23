@@ -1,0 +1,33 @@
+name: Build historical 20-stock EDA
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - stock_eda_2000_2017.py
+      - .github/workflows/stock_eda.yml
+
+permissions:
+  contents: write
+
+jobs:
+  charts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install analysis dependencies
+        run: pip install numpy pandas matplotlib
+      - name: Download, preprocess, and plot historical data
+        run: python stock_eda_2000_2017.py
+      - name: Commit reproducible figures and matrices
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/*.svg data/*.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate 20-stock EDA figures and volatility matrices"
+            git push
+          fi
