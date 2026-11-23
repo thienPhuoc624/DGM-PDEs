@@ -52,8 +52,8 @@ The links below point to the **actual scripts in this repository**. Each result 
 **Code:** [`black_scholes_semi_analytical_case.py`](black_scholes_semi_analytical_case.py)  
 A correlated, **20-dimensional geometric-basket American call** with a known lower-dimensional benchmark. The script currently evaluates \(K=1\), rather than running every dimension in the paper's Table 1.
 
-**Result image:** *Add `Result/Screenshot 2026-11-23 105313.png' here.*  
-<!-- ![Semi-analytic Black–Scholes experiment](results/american_semi_analytic.png) -->
+**Result image:** <img src="Result/Screenshot 2026-11-23 105313.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 **Heterogeneous Black–Scholes case — §4.4**  
 **Code:** [`bs_no_analytic.py`](bs_no_analytic.py)  
