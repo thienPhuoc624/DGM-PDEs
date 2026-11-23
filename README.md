@@ -124,3 +124,63 @@ Run the other experiments in the same way using their linked filenames. **Import
 > Sirignano, J., & Spiliopoulos, K. (2018). **DGM: A deep learning algorithm for solving partial differential equations.** *Journal of Computational Physics*. [Paper](https://arxiv.org/abs/1708.07469) · [DOI](https://doi.org/10.1016/j.jcp.2018.08.029)
 
 This repository is an independent implementation inspired by the research above.
+## 4. Historical stock data, EDA, and volatility matrix (2000–2017)
+
+**Reproducible analysis:** [`stock_eda_2000_2017.py`](stock_eda_2000_2017.py) · [Automated generation workflow](.github/workflows/stock_eda.yml)
+
+This additional analysis constructs the heterogeneous-stock inputs used by the American-option experiments. It downloads **all 20 historical equities named in the paper**, including Tiffany (**TIF**) and Nordstrom (**JWN**), from a [frozen copy](https://github.com/shikha-aggarwal/machine_learning/tree/55e3b5b8b47ddd9e93fd3808ac3fff6c85e3b7ce/datasets/stock_data/Stocks) of the [Huge Stock Market Dataset](https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs). The main archive ends on **November 10, 2017**, not December 31. Two series, **MS** and **TSN**, start in 2005 in that archive; data from [QuantSoftwareToolkit's historical Yahoo snapshot](https://github.com/QuantSoftware/QuantSoftwareToolkit/tree/0eb2c7a776c259a087fdcac1d3ff883eb0b5516c/QSTK/QSData/Yahoo) are rescaled at an overlapping date to backfill their earlier price history. The resulting common window begins in **February 2000**.
+
+### Processing and estimation
+
+1. Download adjusted closing prices; parse dates, remove duplicate/invalid entries, and inspect coverage and missing values.
+2. For visualization, normalize each stock's price with a **trailing 60-trading-day z-score**:
+   $$
+   z_{i,t}^{(60)}=\frac{P_{i,t}-\operatorname{mean}(P_{i,t-59:t})}
+   {\operatorname{std}(P_{i,t-59:t})}.
+   $$
+3. For estimation, use **unnormalized adjusted prices** to calculate daily log returns:
+   $$
+   r_{i,t}=\log(P_{i,t}/P_{i,t-1}),\qquad
+   \sigma_i=\sqrt{252}\,\operatorname{std}(r_i),
+   $$
+   $$
+   \rho_{ij}=\operatorname{corr}(r_i,r_j),\qquad
+   \Sigma_{ij}=252\,\operatorname{cov}(r_i,r_j)=\sigma_i\rho_{ij}\sigma_j.
+   $$
+   All 20 statistics use the same complete-date return observations, without forward-filling.
+
+**Important:** Rolling normalization is for **EDA visualization only**. Computing volatility from the rolling z-scored price series would distort the returns. Here \(\Sigma\) is the **20 × 20 annualized covariance (volatility) matrix**, and \(\sigma\) is the corresponding **20 × 1 annualized volatility vector**.
+
+### Exploratory visualizations
+
+**Rolling-window-normalized prices (60 trading days)**
+
+![60-day normalized historical stock prices](results/prices_60d_zscore.svg)
+
+**Annualized volatility by stock**
+
+![Annualized volatility of all 20 equities](results/annualized_volatility.svg)
+
+**20 × 20 annualized covariance / volatility matrix**
+
+![Annualized covariance matrix heatmap](results/annualized_covariance_matrix.svg)
+
+**20 × 20 correlation matrix**
+
+![Daily log-return correlation matrix](results/correlation_matrix.svg)
+
+### Reproduce and use the output
+
+```bash
+pip install numpy pandas matplotlib
+python stock_eda_2000_2017.py
+```
+
+The script saves:
+
+- [`data/volatilities_2000_2017.csv`](data/volatilities_2000_2017.csv) — annualized \(\sigma_i\), one number per line in the ticker order defined in the script.
+- [`data/correlation_matrix_2000_2017.csv`](data/correlation_matrix_2000_2017.csv) — 20 × 20 matrix \(\rho\).
+- [`data/annualized_covariance_matrix_2000_2017.csv`](data/annualized_covariance_matrix_2000_2017.csv) — 20 × 20 matrix \(\Sigma\).
+- [`data/data_quality.csv`](data/data_quality.csv) and [`data/eda_summary.csv`](data/eda_summary.csv) — coverage and descriptive statistics.
+
+To use the new files with [`bs_no_analytic.py`](bs_no_analytic.py) or [`american_bound.py`](american_bound.py), replace their **Google Colab Drive paths** for the two input CSVs with `data/volatilities_2000_2017.csv` and `data/correlation_matrix_2000_2017.csv`. This is an independently reconstructed historical calibration, **not a claim of exact equality to the original paper's proprietary data preparation**.
