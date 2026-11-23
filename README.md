@@ -8,25 +8,25 @@ This repository implements experiments based on the paper using **TensorFlow**, 
 
 ## 1. Core idea
 
-Classical grid-based PDE solvers become expensive as the spatial dimension grows. **DGM replaces the grid with a neural network** \(f_\theta\) that represents the solution over the domain. Rather than requiring labeled solutions, it learns directly from the PDE and its conditions by sampling fresh collocation points.
+Classical grid-based PDE solvers become expensive as the spatial dimension grows. **DGM replaces the grid with a neural network** $$\(f_\theta\)$$ that represents the solution over the domain. Rather than requiring labeled solutions, it learns directly from the PDE and its conditions by sampling fresh collocation points.
 
 For a parabolic PDE, write
 
 $$
-\mathcal{R}[u](t,x)=\partial_t u(t,x)+\mathcal{L}u(t,x)=0,
-\qquad x\in\Omega\subset\mathbb{R}^d,
+\mathcal{R}u = \partial_t u(t,x) + \mathcal{L}u(t,x) = 0,
+\qquad x \in \Omega \subset \mathbb{R}^d,
 $$
 
-with prescribed boundary data and initial **or** terminal data. DGM minimizes the mean-squared errors
+with prescribed boundary data and initial or terminal data. DGM minimizes the mean-squared errors
 
 $$
-\mathcal{J}(\theta)=
-\lambda_{\mathrm{PDE}}\,\mathbb{E}_{(t,x)\sim\nu_\Omega}
-\big|\mathcal{R}[f_\theta](t,x)\big|^2
-+\lambda_{\mathrm{BC}}\,\mathbb{E}_{(t,x)\sim\nu_{\partial\Omega}}
-\big|f_\theta-b\big|^2
-+\lambda_{\mathrm{IC/TC}}\,\mathbb{E}_{x\sim\nu_0}
-\big|f_\theta(t_*,x)-g(x)\big|^2.
+\mathcal{J}(\theta) =
+\lambda_{\mathrm{PDE}} \, \mathbb{E}_{(t,x)\sim\nu_\Omega}
+\big|\mathcal{R} f_\theta\big|^2
++ \lambda_{\mathrm{BC}} \, \mathbb{E}_{(t,x)\sim\nu_{\partial\Omega}}
+\big|f_\theta - b\big|^2
++ \lambda_{\mathrm{IC/TC}} \, \mathbb{E}_{x\sim\nu_0}
+\big|f_\theta(t_*,x) - g(x)\big|^2.
 $$
 
 Here \(t_*\) is the initial or terminal time, as appropriate. Derivatives are obtained by **automatic differentiation**; optimization uses **Adam** and independently sampled batches. Thus, training needs no full space-time mesh.
