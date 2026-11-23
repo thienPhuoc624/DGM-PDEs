@@ -52,30 +52,24 @@ The links below point to the **actual scripts in this repository**. Each result 
 **Code:** [`black_scholes_semi_analytical_case.py`](black_scholes_semi_analytical_case.py)  
 A correlated, **20-dimensional geometric-basket American call** with a known lower-dimensional benchmark. The script currently evaluates \(K=1\), rather than running every dimension in the paper's Table 1.
 
-**Result image:** <img src="Result/Screenshot 2026-11-23 105313.png"
+ <img src="Result/Screenshot 2026-11-23 105313.png"
      alt="Table 1 reference" style="max-width:100%;">
 
-**Heterogeneous Black–Scholes case — §4.4**  
-**Code:** [`bs_no_analytic.py`](bs_no_analytic.py)  
-Trains the DGM approximation for a **20-dimensional arithmetic-basket American call**, with asset-specific volatilities and correlations and no semi-analytic reference. The current run uses \(K=0.95\).
-
-**Result image:** *Add `results/american_heterogeneous.png` here.*  
-<!-- ![Heterogeneous American option experiment](results/american_heterogeneous.png) -->
 
 **Lower/upper price bounds — Table 2 / §4.4**  
 **Code:** [`american_bound.py`](american_bound.py)  
 Uses simulated stock paths to estimate **stopping-based lower and dual-style upper bounds** on the option value. Its bound evaluation uses a **Hutchinson Hessian-trace estimator** to reduce the cost of evaluating the diffusion term. The default case is \(d=20\), \(K=0.95\).
 
-**Result image:** *Add `results/american_bounds.png` here.*  
-<!-- ![American option lower and upper bounds](results/american_bounds.png) -->
+ <img src="Result/Screenshot 2026-11-23 105646.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 ### B. Hamilton–Jacobi–Bellman equation (paper §5, Figure 4)
 
 **Code:** [`hjb.py`](hjb.py)  
 Solves a **21-dimensional stationary HJB equation** arising from control of a stochastic heat equation. Compares DGM with a quadratic/Riccati reference and plots a spatial **percentage-error contour** (the script saves `figure4_like.png`). Its early-stopping threshold is a *code setting*, not the paper's reported accuracy.
 
-**Result image:** *Add `results/hjb_figure4.png` here.*  
-<!-- ![HJB percentage-error contour](results/hjb_figure4.png) -->
+ <img src="Result/Screenshot 2026-11-23 105734.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 ### C. Parameterized Burgers' equation (paper §6, Figures 5–7)
 
@@ -90,22 +84,22 @@ $$
 **Code:** [`burger_4_3.py`](burger_4_3.py)  
 Compares DGM against finite differences for several choices of \((\nu,\alpha,a,b)\) at \(t=1\).
 
-**Result image:** *Add `results/burgers_figure5.png` here.*  
-<!-- ![Burgers Figure 5: parameter comparison](results/burgers_figure5.png) -->
+ <img src="Result/Screenshot 2026-11-23 105823.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 **Figure 6 — Time evolution and viscosity**  
 **Code:** [`burger_4_4.py`](burger_4_4.py)  
 Studies the formation of steep solution profiles at different times and viscosities, against finite-difference reference curves.
 
-**Result image:** *Add `results/burgers_figure6.png` here.*  
-<!-- ![Burgers Figure 6: time and viscosity](results/burgers_figure6.png) -->
+ <img src="Result/Screenshot 2026-11-23 105846.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 **Figure 7 — Error across parameter space**  
 **Code:** [`burger_4_5.py`](burger_4_5.py)  
 Builds a contour of the **mean absolute error** versus viscosity \(\nu\) and boundary value \(b\), averaged over \(x\) at \(t=1\).
 
-**Result image:** *Add `results/burgers_figure7.png` here.*  
-<!-- ![Burgers Figure 7: error contour](results/burgers_figure7.png) -->
+ <img src="Result/Screenshot 2026-11-23 105908.png"
+     alt="Table 1 reference" style="max-width:100%;">
 
 ## 3. Running the code
 
