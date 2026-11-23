@@ -185,4 +185,4 @@ The script saves:
 - [`data/annualized_covariance_matrix_2000_2017.csv`](data/annualized_covariance_matrix_2000_2017.csv) — 20 × 20 matrix \(\Sigma\).
 - [`data/data_quality.csv`](data/data_quality.csv) and [`data/eda_summary.csv`](data/eda_summary.csv) — coverage and descriptive statistics.
 
-To use the new files with [`bs_no_analytic.py`](bs_no_analytic.py) or [`american_bound.py`](american_bound.py), replace their **Google Colab Drive paths** for the two input CSVs with `data/volatilities_2000_2017.csv` and `data/correlation_matrix_2000_2017.csv`. This is an independently reconstructed historical calibration, **not a claim of exact equality to the original paper's proprietary data preparation**.
+To use the new files with [`bs_no_analytic.py`](bs_no_analytic.py) or [`american_bound.py`](american_bound.py), replace their **Google Colab Drive paths** for the two input CSVs with `data/volatilities_2000_2017.csv` and `data/correlation_matrix_2000_2017.csv`. This is an independently reconstructed historical calibration, **not a claim of exact equality to the original paper's data preparation**.
